@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EndActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/pelican_eats_capybara"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/resultbox"
+        android:layout_width="350dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="31dp"
+        android:background="@color/opaqBlack"
+        android:gravity="center"
+        android:text="Result:"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/backtomenu"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="432dp"
+        android:background="@drawable/longbtn"
+        android:text="Back to menu"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/playagain"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="495dp"
+        android:background="@drawable/longbtn"
+        android:text="play again"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

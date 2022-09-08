@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GameActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/capybara_orange"
+        android:scaleType="centerCrop"
+        android:scaleX="5"
+
+        />
+
+
+    <LinearLayout
+        android:id="@+id/player1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginStart="60dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/opaqWhite">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Player 1"
+            android:background="@color/opaqBlack"
+            android:textColor="@color/white"
+            android:textAlignment="center" />
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:background="@drawable/cross" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/player2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginEnd="60dp"
+        android:layout_marginTop="80dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/opaqWhite">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:text="Player 2"
+            android:background="@color/opaqBlack"
+            android:textColor="@color/white"
+            android:textAlignment="center" />
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:background="@drawable/circle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/board"
+        android:layout_width="330dp"
+        android:layout_height="330dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bigrat"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="213dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="132dp"
+        android:background="@color/opaqWhite"
+        android:gravity="center"
+        android:text="TIC-TAC-TOE"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/offlinebtn"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="432dp"
+        android:background="@drawable/longbtn"
+        android:text="Play offline"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/onlinebtn"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginTop="495dp"
+        android:background="@drawable/longbtn"
+        android:text="Play online"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
