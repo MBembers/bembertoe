@@ -11,20 +11,90 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameActivity extends AppCompatActivity {
 
-    private int turn = 0; // 0 - x | 1 - o | 2 - winX | 3 - winY | 4 - draw
+    private int turn = 0; // 0 - x | 1 - o | 2 - winX | 3 - winY | 4 - draw | 5 - pending
     private LinearLayout[][] buttons;
     private int[][] game; // 0 - empty | 1 - x | 2 - y
     private LinearLayout player1;
     private LinearLayout player2;
+
+    private DatabaseReference dbref;
+    private String roomKey;
+    private Room room;
+    private int player = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            boolean value = extras.getBoolean("online");
+            if(value) {
+                getDbConnection();
+                checkForRooms();
+            }
+            else {
+                start();
+            }
+        }
+
+
+    }
+
+    private void getDbConnection(){
+        dbref = FirebaseDatabase.getInstance("https://bednarztoe-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+    }
+
+    private void checkForRooms(){
+        dbref.child("rooms").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                    Room rum = snapshot.getValue(Room.class);
+                    if(rum.getTurn() == 5) {
+                        joinRoom(rum.getKey());
+                        dbref.child("rooms").removeEventListener(this);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+            }
+        });
+    }
+
+    private void joinRoom(String key){
+        roomKey = key;
+        // dolaczanie do pokoju i gra
+    }
+
+    private void createRoom(){
+        String newRoomKey = dbref.child("rooms").push().getKey();
+
+        room = new Room(newRoomKey, "occupied");
+        dbref.child("rooms/" + newRoomKey).setValue(room);
+        player = 1;
+    }
+
+
+    private void start(){
         player1 = findViewById(R.id.player1);
         player2 = findViewById(R.id.player2);
 
@@ -56,7 +126,7 @@ public class GameActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         if(game[finalI][finalJ] == 0 && (turn == 0 || turn == 1))
-                        place(finalI, finalJ);
+                            place(finalI, finalJ);
                     }
                 });
                 row.addView(tile);
