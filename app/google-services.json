@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "839594197189",
+    "firebase_url": "https://bednarztoe-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "bednarztoe",
+    "storage_bucket": "bednarztoe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:839594197189:android:98feda0030d608aef630ac",
+        "android_client_info": {
+          "package_name": "com.example.bednarztoe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "839594197189-2gnb3e35h5s43i7hj2esas5l9hf62oub.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABa44NB4k9ECmyt4uKV4MB1WT_u6OTaAM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "839594197189-2gnb3e35h5s43i7hj2esas5l9hf62oub.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

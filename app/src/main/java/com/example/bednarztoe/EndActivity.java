@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 public class EndActivity extends AppCompatActivity {
 
+    private boolean isOnline;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +22,7 @@ public class EndActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             int value = extras.getInt("result");
+            isOnline = extras.getBoolean("isOnline");
             if(value == 2){
                 resultBox.setText("Result: cross wins");
             }
@@ -45,6 +48,7 @@ public class EndActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent GameActivityIntent = new Intent(EndActivity.this, GameActivity.class);
+                GameActivityIntent.putExtra("online", isOnline);
                 startActivity(GameActivityIntent);
             }
         });
