@@ -29,6 +29,13 @@ public class Room {
         this.board = null;
     }
 
+    public Room(String key, String player1, int turn) {
+        this.key = key;
+        this.player1 = player1;
+        this.player2 = null;
+        this.turn = turn;
+        this.board = null;
+    }
 
     public Room(String key, String player1, String player2, int turn, ArrayList<ArrayList<Integer>> board) {
         this.key = key;
