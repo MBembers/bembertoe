@@ -47,7 +47,7 @@ public class GameActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        
+
         player1 = findViewById(R.id.player1);
         player2 = findViewById(R.id.player2);
         boardLayout = findViewById(R.id.board);
@@ -57,11 +57,12 @@ public class GameActivity extends AppCompatActivity {
             isOnline = extras.getBoolean("online");
             if(isOnline) {
                 rematchKey = extras.getString("rematchKey");
+                Log.d("XXX", "rematchKey: " + rematchKey);
+
                 joined = false;
                 isStarting = true;
                 getDbConnection();
                 if(rematchKey != null){
-                    Log.d("XXX", "rematchKey: " + rematchKey);
                     currRoom = new Room(rematchKey, "ready", 6);
                     connectToRoom();
                 }
@@ -165,6 +166,21 @@ public class GameActivity extends AppCompatActivity {
                         start();
                         return;
                 }
+                if(rematchKey != null && !joined && currRoom.getTurn() == 6){
+                    if(currRoom.getPlayer1() == null) {
+                        currRoom.setPlayer1("ready");
+                        currPlayer = 0;
+                    }
+                    else if(Objects.equals(currRoom.getPlayer1(), "ready")) {
+                        currRoom.setPlayer2("playing");
+                        currPlayer = 1;
+                        currRoom.setTurn(0);
+                        start();
+                    }
+                    joined = true;
+                    uploadRoom();
+                    return;
+                }
                 if(currRoom != null && !joined){
                     joined = true;
                     start();
@@ -176,7 +192,9 @@ public class GameActivity extends AppCompatActivity {
                         dbref.child("rooms/"+currRoom.getKey()).removeEventListener(this);
                         end(currRoom.getTurn());
                     }
+                    return;
                 }
+
 
             }
 
@@ -314,8 +332,8 @@ public class GameActivity extends AppCompatActivity {
         Intent i = new Intent(GameActivity.this, EndActivity.class);
         i.putExtra("result", result);
         i.putExtra("isOnline", isOnline);
-        i.putExtra("player", currPlayer);
-        if(isOnline) i.putExtra("key", roomKey);
+        if(isOnline) i.putExtra("player", currPlayer);
+        if(isOnline) i.putExtra("key", currRoom.getKey());
         startActivity(i);
     }
 

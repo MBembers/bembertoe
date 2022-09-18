@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -66,8 +67,11 @@ public class EndActivity extends AppCompatActivity {
                     dbref.child("rooms/"+roomKey).addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Log.d("XXX", "KEY TO SEARCH: " + roomKey);
                             Room newRoom = dataSnapshot.getValue(Room.class);
                             if(newRoom != null){
+                                Log.d("XXX", "REMATCH SEARCH: " + newRoom.toString());
+
                                 if(newRoom.getTurn() == 6){
                                     Intent GameActivityIntent = new Intent(EndActivity.this, GameActivity.class);
                                     GameActivityIntent.putExtra("rematchKey", newRoom.getKey());
@@ -77,12 +81,10 @@ public class EndActivity extends AppCompatActivity {
                                     return;
                                 }
                             }
-                            dbref.child("rooms/"+roomKey).setValue(new Room(roomKey, "rematch", 6));
-                            Intent GameActivityIntent = new Intent(EndActivity.this, GameActivity.class);
-                            GameActivityIntent.putExtra("rematchKey", roomKey);
-                            GameActivityIntent.putExtra("online", true);
-                            startActivity(GameActivityIntent);
+                            dbref.child("rooms/"+roomKey).setValue(new Room(roomKey, null, 6));
                             return;
+
+
                         }
 
                         @Override
@@ -91,7 +93,8 @@ public class EndActivity extends AppCompatActivity {
                         }
                     });
                 }
-                else{
+                else {
+                    Log.d("XXX", "onClick: OFFLINE");
                     Intent GameActivityIntent = new Intent(EndActivity.this, GameActivity.class);
                     GameActivityIntent.putExtra("online", isOnline);
                     startActivity(GameActivityIntent);
