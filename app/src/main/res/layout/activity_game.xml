@@ -20,20 +20,21 @@
         android:id="@+id/player1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginTop="80dp"
         android:layout_marginStart="60dp"
+        android:layout_marginTop="80dp"
+        android:background="@color/opaqWhite"
         android:orientation="vertical"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/opaqWhite">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:text="Player 1"
             android:background="@color/opaqBlack"
-            android:textColor="@color/white"
-            android:textAlignment="center" />
+            android:text="Player 1"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
@@ -45,20 +46,20 @@
         android:id="@+id/player2"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginEnd="60dp"
         android:layout_marginTop="80dp"
+        android:layout_marginEnd="60dp"
+        android:background="@color/opaqWhite"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@color/opaqWhite">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:text="Player 2"
             android:background="@color/opaqBlack"
-            android:textColor="@color/white"
-            android:textAlignment="center" />
+            android:text="Player 2"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
 
         <ImageView
             android:layout_width="80dp"
@@ -66,6 +67,20 @@
             android:layout_gravity="center"
             android:background="@drawable/circle" />
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/currPlayerBox"
+        android:layout_width="143dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="134dp"
+        android:layout_marginTop="256dp"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:text=""
+        android:background="@color/opaqBlack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/board"
@@ -75,7 +90,6 @@
         android:layout_marginBottom="40dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

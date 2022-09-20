@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -54,6 +55,11 @@ public class EndActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent GameActivityIntent = new Intent(EndActivity.this, MainActivity.class);
                 startActivity(GameActivityIntent);
+
+                if(isOnline){
+                    DatabaseReference dbref = FirebaseDatabase.getInstance("https://bednarztoe-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
+                    dbref.child("rooms/"+roomKey).setValue(null);
+                }
             }
         });
 
@@ -80,6 +86,18 @@ public class EndActivity extends AppCompatActivity {
                                     dbref.child("rooms/"+roomKey).removeEventListener(this);
                                     return;
                                 }
+                            }
+                            else{
+                                dbref.child("rooms/"+roomKey).removeEventListener(this);
+                                dbref.child("rooms/"+roomKey).setValue(null);
+                                Intent MainActivityIntent = new Intent(EndActivity.this, MainActivity.class);
+                                startActivity(MainActivityIntent);
+                                CharSequence text = "Opponent left the game";
+                                int duration = Toast.LENGTH_SHORT;
+
+                                Toast toast = Toast.makeText(EndActivity.this, text, duration);
+                                toast.show();
+                                return;
                             }
                             dbref.child("rooms/"+roomKey).setValue(new Room(roomKey, null, 6));
                             return;

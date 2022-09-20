@@ -1,5 +1,6 @@
 package com.example.bednarztoe;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
@@ -13,6 +14,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -69,8 +71,20 @@ public class GameActivity extends AppCompatActivity {
                 else{
                     checkForRooms();
                 }
+                OnBackPressedCallback callback = new OnBackPressedCallback(true /* enabled by default */) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        if(currRoom != null)
+                            dbref.child("rooms/"+currRoom.getKey()).setValue(null);
+                        Intent GameActivityIntent = new Intent(GameActivity.this, MainActivity.class);
+                        startActivity(GameActivityIntent);
+                    }
+                };
+                getOnBackPressedDispatcher().addCallback(this, callback);
+
             }
             else {
+                findViewById(R.id.currPlayerBox).setVisibility(View.GONE);
                 this.start();
             }
         }
@@ -141,6 +155,9 @@ public class GameActivity extends AppCompatActivity {
 
     private void test(){
         Log.d("XXX", "test: " + currRoom.toString());
+//        dbref.child("rooms/"+currRoom.getKey()).setValue(null);
+        dbref.child("sus").setValue(null);
+
     }
 
     private void uploadRoom(){
@@ -154,6 +171,15 @@ public class GameActivity extends AppCompatActivity {
                 Room rum = dataSnapshot.getValue(Room.class);
                 if(rum == null){
                     dbref.child("rooms/"+currRoom.getKey()).removeEventListener(this);
+                    dbref.child("rooms/"+currRoom.getKey()).setValue(null);
+                    Intent MainActivityIntent = new Intent(GameActivity.this, MainActivity.class);
+                    startActivity(MainActivityIntent);
+
+                    CharSequence text = "Opponent left the game";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(GameActivity.this, text, duration);
+                    toast.show();
                     return;
                 }
                 currRoom = rum;
@@ -209,6 +235,7 @@ public class GameActivity extends AppCompatActivity {
 
         Log.d("XXX", "start: ");
         player1.setBackground(getDrawable(R.color.opaqRed));
+        ((TextView) findViewById(R.id.currPlayerBox)).setText(currPlayer == 0 ? "player 1" : "player 2");
 
         game = new int[3][3];
         buttons = new LinearLayout[3][3];
